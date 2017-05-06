@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-
-import './App.css';
-import Main from './Main';
+import React from 'react';
 import Header from './Header';
+import Footer from './Footer';
+import Banner from './Banner';
+import Section from './Section';
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
-      <div className="App">
-        <Header title='This is a title.'/>
-        <Main />
-      </div>
+        <div id="page-wrapper">
+            <Header />
+            <Banner />
+            <Section />
+            <Footer />
+        </div>
     );
-  }
-}
+};
 
 export default App;
