@@ -1,15 +1,14 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Banner from './Banner';
-import Section from './Section';
+
+import Main from './Main';
 
 const App = () => {
     return (
         <div id="page-wrapper">
             <Header />
-            <Banner />
-            <Section />
+            <Main />
             <Footer />
         </div>
     );
