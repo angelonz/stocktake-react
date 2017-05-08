@@ -3,12 +3,12 @@ import { Switch, Route } from 'react-router-dom';
 import Landing from './Landing';
 import Register from './Register';
 
-const Main = (props) => {
+const Main = () => {
     
     return (
         <Switch>
             <Route exact path='/' component={Landing}/>
-            <Route exact path='/register' component={Register}/>
+            <Route path='/register' component={Register}/>
         </Switch>
     );
 };
