@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connector } from './reducers';
+import { connect } from 'react-redux';
 
 class Register extends Component {
     
@@ -47,4 +47,15 @@ class Register extends Component {
     
 };
 
-export default connector(Register);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleHeader: (show) => {
+      dispatch({
+        type: 'TOGGLE_HEADER',
+        value: show
+      })
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Register);

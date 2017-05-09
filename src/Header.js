@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import { Link } from 'react-router-dom';
-import { connector } from './reducers';
+import { connect } from 'react-redux';
 
 const Header = ({ showHeader }) => {
     return (
@@ -12,4 +12,10 @@ const Header = ({ showHeader }) => {
     );
 };
 
-export default connector(Header);
+const mapStateToProps = (state) => {
+  return {
+    showHeader: state.showHeader
+  }
+};
+
+export default connect(mapStateToProps)(Header);
