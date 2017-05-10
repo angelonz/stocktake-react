@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const Header = ({ showHeader }) => {
+    console.log('showHeader', showHeader);
     return (
         <header id="header" className={showHeader === true ? '' : 'alt'}>
             <h1><Link to="/">StockTake</Link></h1>
@@ -13,9 +14,10 @@ const Header = ({ showHeader }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    showHeader: state.showHeader
-  }
+    const { showHeader } = state.showHeader;
+    return {
+        showHeader
+    }
 };
 
 export default connect(mapStateToProps)(Header);

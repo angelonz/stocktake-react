@@ -1,12 +1,16 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-let initialState = {
-  showHeader: false
+const initialState = {
+  showHeader: false,
+  form: {} 
 }
 
-const rootReducer = (state = initialState, action) => {
+const headerReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
+       console.log('state', state);
+       console.log('action', action.value);
        return Object.assign({}, state, {
             showHeader: action.value
         });
@@ -14,6 +18,13 @@ const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+const reducers = {
+  showHeader: headerReducer,
+  form: formReducer
+};
+
+const rootReducer = combineReducers(reducers);
 
 const store = createStore(rootReducer);
 
