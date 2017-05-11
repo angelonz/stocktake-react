@@ -13,9 +13,8 @@ const Header = ({ showHeader }) => {
 };
 
 const mapStateToProps = (state) => {
-    const { showHeader } = state.showHeader;
     return {
-        showHeader
+        showHeader: state.showHeader
     }
 };
 

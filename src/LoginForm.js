@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import FormField from './FormField';
+import { assign } from 'lodash';
+import { connect } from 'react-redux';
+import register from './actions/registrationActions' 
 
 class LoginForm extends Component {
 
+    constructor(props) {
+        super(props);
+        this.submitHandler = this.submitHandler.bind(this);
+    }
+    
+
+    submitHandler(values) {
+
+        // we don't need the confirm-password property
+        let formValues = assign({}, values);
+        if (formValues['confirm-password']) {
+            formValues = delete formValues['confirm-password'];
+        }
+
+        this.props.registerUser(formValues);
+
+    }
+
     render() {
-        console.log('props', this.props);
         const { handleSubmit, reset } = this.props;
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(this.submitHandler)}>
                 <div className="row uniform">
                     <FormField type="text" name="username" id="username" value="" placeholder="Name" cssClass="6u$ 12u$(xsmall)" />
                     <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
@@ -28,14 +48,20 @@ class LoginForm extends Component {
     }
 }
 
-const submitHandler = (values) => {
-    console.log('submit', values);
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        registerUser: (formValues) => {
+            register(formValues)
+        }
+    };
 }
 
 // Decorate the form component
 LoginForm = reduxForm({
-  form: 'login', // a unique name for this form
-  onSubmit: submitHandler
+  form: 'login' // a unique name for this form
+  
 })(LoginForm);
 
-export default LoginForm;
+export default connect(null, mapDispatchToProps)(LoginForm);
