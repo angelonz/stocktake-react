@@ -53,7 +53,8 @@ class LoginForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         registerUser: (formValues) => {
-            register(formValues)
+            console.log(formValues);
+            dispatch(register(formValues));
         }
     };
 }

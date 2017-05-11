@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { assign } from 'lodash';
 import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const toggleHeader = (state = false, action) => {
   switch (action.type) {
@@ -42,11 +43,10 @@ const reducers = {
 const rootReducer = combineReducers(reducers);
 
 const store = createStore(
-  rootReducer, 
-  applyMiddleware(
-    thunkMiddleware // lets us dispatch() functions
-  ),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer, composeWithDevTools(
+    applyMiddleware(thunkMiddleware),
+    // other store enhancers if any
+  )
 );
 
 export { store };

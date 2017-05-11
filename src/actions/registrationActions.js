@@ -1,4 +1,5 @@
-import { request } from 'superagent';
+import request from 'superagent';
+import HttpStatus from 'http-status-codes';
 
 const register = (formValues) => {
 
@@ -12,9 +13,9 @@ const register = (formValues) => {
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send(formValues)
             .end((err, res) => {
-                console.log('in register');
+
                 let action = 'REGISTER_SUCCESS';
-                if (err) {
+                if (err || res.status !== HttpStatus.OK) {
                     action = 'REGISTER_FAILED';
                 } 
 
