@@ -5,14 +5,13 @@ import { assign } from 'lodash';
 import { connect } from 'react-redux';
 import register from './actions/registrationActions' 
 
-class LoginForm extends Component {
+class RegistrationForm extends Component {
 
     constructor(props) {
         super(props);
         this.submitHandler = this.submitHandler.bind(this);
     }
     
-
     submitHandler(values) {
 
         // we don't need the confirm-password property
@@ -60,9 +59,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // Decorate the form component
-LoginForm = reduxForm({
+RegistrationForm = reduxForm({
   form: 'login' // a unique name for this form
   
-})(LoginForm);
+})(RegistrationForm);
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(RegistrationForm);

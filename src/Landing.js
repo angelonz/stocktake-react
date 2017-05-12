@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Banner from './Banner';
 import Section from './Section';
 
-const Landing = () => {
-    return (
-        <div>
-            <Banner />
-            <Section />
-        </div>
-    );
+class Landing extends Component {
+
+    componentDidMount() {
+        this.props.toggleHeader(false);
+    }
+
+    render() {
+        return (
+            <div>
+                <Banner />
+                <Section />
+            </div>
+        );
+    }
+
 };
 
-export default Landing;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleHeader: (show) => {
+      dispatch({
+        type: 'TOGGLE_HEADER',
+        value: show
+      })
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Landing);

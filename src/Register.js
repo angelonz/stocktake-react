@@ -1,41 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import LoginForm from './LoginForm';
+import React from 'react';
+import RegistrationForm from './RegistrationForm';
 
-class Register extends Component {
+const Register = () => {
 
-    componentDidMount() {
-        this.props.toggleHeader(true);
-    }
+    return (
+        <article id="main">
+            <section className="wrapper style5">
+                <div className="inner">
 
-    render() {
-        return (
-            <article id="main">
-                <section className="wrapper style5">
-                    <div className="inner">
+                    <section>
+                        <h3>Register</h3>
+                        <RegistrationForm />
+                    </section>
 
-                        <section>
-                            <h3>Register</h3>
-                            <LoginForm />
-                        </section>
-
-                    </div>
-                </section>
-            </article>
-        );
-    }
+                </div>
+            </section>
+        </article>
+    );
     
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleHeader: (show) => {
-      dispatch({
-        type: 'TOGGLE_HEADER',
-        value: show
-      })
-    }
-  }
-};
-
-export default connect(null, mapDispatchToProps)(Register);
+export default Register;

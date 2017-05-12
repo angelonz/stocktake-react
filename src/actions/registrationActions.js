@@ -1,5 +1,6 @@
 import request from 'superagent';
 import HttpStatus from 'http-status-codes';
+import { push } from 'react-router-redux';
 
 const register = (formValues) => {
 
@@ -14,14 +15,15 @@ const register = (formValues) => {
             .send(formValues)
             .end((err, res) => {
 
-                let action = 'REGISTER_SUCCESS';
                 if (err || res.status !== HttpStatus.OK) {
-                    action = 'REGISTER_FAILED';
-                } 
-
-                dispatch({
-                    type: action
-                });
+                    dispatch({ type: 'REGISTER_FAILED' });
+                } else {
+                    dispatch({ 
+                        type: 'REGISTER_SUCCESS',
+                        email: formValues.email
+                    });
+                    dispatch(push('/activate'));
+                }
 
             });
 

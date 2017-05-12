@@ -1,10 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 import { assign } from 'lodash';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { reducer as formReducer } from 'redux-form';
 
-const toggleHeader = (state = false, action) => {
+const toggleHeader = (state = true, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
       return action.value;
@@ -22,7 +19,8 @@ const userRegistration = (state = {}, action) => {
     case 'REGISTER_SUCCESS':
       return assign({}, state, {
         registrationInProgress: false,
-        registrationStatus: 'success'
+        registrationStatus: 'success',
+        email: action.email
       });
     case 'REGISTER_FAILED':  
       return assign({}, state, {
@@ -40,13 +38,4 @@ const reducers = {
   form: formReducer
 };
 
-const rootReducer = combineReducers(reducers);
-
-const store = createStore(
-  rootReducer, composeWithDevTools(
-    applyMiddleware(thunkMiddleware),
-    // other store enhancers if any
-  )
-);
-
-export { store };
+export default reducers ;
