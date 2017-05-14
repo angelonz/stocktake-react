@@ -1,13 +1,13 @@
 import React from 'react';
+import LoginForm from './LoginForm';
 import FormWrapper from './FormWrapper';
-import RegistrationForm from './RegistrationForm';
 
-const Register = () => {
+const Login = () => {
     return (
         <FormWrapper>
-            <RegistrationForm />
+            <LoginForm />
         </FormWrapper>
     );
 };
 
-export default Register;
+export default Login;

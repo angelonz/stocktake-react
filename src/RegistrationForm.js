@@ -27,22 +27,26 @@ class RegistrationForm extends Component {
     render() {
         const { handleSubmit, reset } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.submitHandler)}>
-                <div className="row uniform">
-                    <FormField type="text" name="username" id="username" value="" placeholder="Name" cssClass="6u$ 12u$(xsmall)" />
-                    <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
-                    <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
-                    <FormField type="password" name="confirm-password" id="confirm-password" value="" placeholder="Confirm Password" cssClass="6u$ 12u$(xsmall)" />
-                    <FormField type="text" name="secret" id="secret" value="" placeholder="Secret" cssClass="6u$ 12u$(xsmall)" />
-                    
-                    <div className="12u$">
-                        <ul className="actions">
-                            <li><input type="submit" value="Register" className="special" /></li>
-                            <li><input type="reset" value="Reset" onClick={reset}/></li>
-                        </ul>
-                    </div>
-                </div>    
-            </form>
+            <section>
+                <h3>Register</h3>
+                <form onSubmit={handleSubmit(this.submitHandler)}>
+                    <div className="row uniform">
+                        <FormField type="text" name="username" id="username" value="" placeholder="Name" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="password" name="confirm-password" id="confirm-password" value="" placeholder="Confirm Password" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="text" name="secret" id="secret" value="" placeholder="Secret" cssClass="6u$ 12u$(xsmall)" />
+                        
+                        <div className="12u$">
+                            <ul className="actions">
+                                <li><input type="submit" value="Register" className="special" /></li>
+                                <li><input type="reset" value="Reset" onClick={reset}/></li>
+                            </ul>
+                        </div>
+                    </div>    
+                </form>
+            </section>
+            
         );
     }
 }
@@ -60,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // Decorate the form component
 RegistrationForm = reduxForm({
-  form: 'login' // a unique name for this form
+  form: 'register' // a unique name for this form
   
 })(RegistrationForm);
 
