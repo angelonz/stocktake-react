@@ -32,16 +32,13 @@ class LoginForm extends Component {
 
     render() {
         const { handleSubmit } = this.props;
-        let verificationMessage = <VerificationMessage />;
-
-        /*
+        let verificationMessage = null;
 
         const { verificationInProgress, verificationStatus } = this.props.verification;
 
         if (!verificationInProgress && verificationStatus === 'success') {
-            verificationMessage = <h3>Verified</h3>;
+            verificationMessage = <VerificationMessage />;
         }
-        */
 
         return (
             <section>
@@ -78,7 +75,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state);
     const { pathname, search } = state.router.location;
     return {
         pathname,
