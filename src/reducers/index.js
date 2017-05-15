@@ -30,11 +30,33 @@ const userRegistration = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
+
+const verification = (state = {}, action) => {
+  switch (action.type) {
+    case 'VERIFY':
+      return assign({}, state, {
+        verificationInProgress: true
+      });
+    case 'VERIFY_SUCCESS':
+      return assign({}, state, {
+        verificationInProgress: false,
+        verificationStatus: 'success'
+      });
+    case 'VERIFY_FAILED':
+      return assign({}, state, {
+        verificationInProgress: false,
+        verificationStatus: 'failed'
+      });
+    default:
+      return state;
+  }
+};
 
 const reducers = {
   showHeader: toggleHeader,
   registration: userRegistration,
+  verification: verification,
   form: formReducer
 };
 

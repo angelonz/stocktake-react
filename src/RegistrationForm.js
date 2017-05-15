@@ -56,7 +56,6 @@ class RegistrationForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         registerUser: (formValues) => {
-            console.log(formValues);
             dispatch(register(formValues));
         }
     };
