@@ -4,7 +4,9 @@ import FormField from './FormField';
 import { connect } from 'react-redux';
 //import queryString from 'query-string';
 import verify from './actions/verificationActions' 
+import login from './actions/loginActions' 
 import VerificationMessage from './VerificationMessage';
+import { push } from 'react-router-redux';
 
 class LoginForm extends Component {
 
@@ -18,16 +20,12 @@ class LoginForm extends Component {
         const { pathname, search } = this.props;
 
         if (pathname && pathname === '/verify') { // came from email verification link
-
-            if (search) {
-                //this.props.verify(search);
-            }
-
+            this.props.verify(search);
         } 
     }
     
     submitHandler(values) {
-
+        this.props.login(values);
     }
 
     render() {
@@ -66,10 +64,16 @@ class LoginForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (formValues) => {
-            
+            dispatch(login(formValues));
         },
         verify: (urlParams) => {
-            dispatch(verify(urlParams));
+            if (urlParams) {
+                dispatch(verify(urlParams));
+            } else {
+                // no-match is not a real path, it just forces a redirect to the 404 page
+                dispatch(push('/no-match'));
+            }
+            
         }
     };
 }

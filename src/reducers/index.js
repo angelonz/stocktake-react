@@ -53,10 +53,32 @@ const verification = (state = {}, action) => {
   }
 };
 
+const login = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return assign({}, state, {
+        loginInProgress: true
+      });
+    case 'LOGIN_SUCCESS':
+      return assign({}, state, {
+        loginInProgress: false,
+        authenticated: true
+      });
+    case 'LOGIN_FAILED':
+      return assign({}, state, {
+        loginInProgress: false,
+        authenticated: false
+      });
+    default:
+      return state;
+  }
+};
+
 const reducers = {
   showHeader: toggleHeader,
   registration: userRegistration,
   verification: verification,
+  login: login,
   form: formReducer
 };
 
