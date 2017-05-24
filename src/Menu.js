@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 const Menu = (props) => {
 
     let loginMenuItem = <MenuItem path="/login" text="Log in" />;
-    if (props.authenticated === true) {
-        loginMenuItem = <MenuItem path="/logout" text="Log out" />;
+
+    if (props.authenticated) {
+        loginMenuItem = <MenuItem path="/logout" text="Log out" />
     }
 
     return (

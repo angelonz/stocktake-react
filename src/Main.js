@@ -1,10 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Landing from './Landing';
 import Register from './Register';
 import Login from './Login';
 import AccountActivation from './AccountActivation';
 import NoMatch from './NoMatch';
+import authUtil from './utils/authUtil';
 
 const Main = () => {
     
@@ -15,6 +16,10 @@ const Main = () => {
             <Route path='/activate' component={AccountActivation}/>
             <Route path='/verify' component={Login} />
             <Route path='/login' component={Login} />
+            <Route path='/logout' render={() => {
+                authUtil.logout();
+                return <Redirect to='/'/>
+            }} />
             <Route component={NoMatch}/>
         </Switch>
     );

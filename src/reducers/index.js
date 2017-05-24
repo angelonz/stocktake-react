@@ -64,6 +64,7 @@ const login = (state = {}, action) => {
         loginInProgress: false,
         authenticated: true
       });
+    case 'LOGOUT':  
     case 'LOGIN_FAILED':
       return assign({}, state, {
         loginInProgress: false,
