@@ -17,7 +17,7 @@ class RegistrationForm extends Component {
         // we don't need the confirm-password property
         let formValues = assign({}, values);
         if (formValues['confirm-password']) {
-            formValues = delete formValues['confirm-password'];
+            delete formValues['confirm-password'];
         }
 
         this.props.registerUser(formValues);

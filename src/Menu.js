@@ -1,16 +1,29 @@
 import React from 'react';
 import MenuItem from './MenuItem';
+import { connect } from 'react-redux';
 
-const Menu = () => {
+const Menu = (props) => {
+
+    let loginMenuItem = <MenuItem path="/login" text="Log in" />;
+    if (props.authenticated) {
+        loginMenuItem = <MenuItem path="/logout" text="Log out" />
+    }
+
     return (
         <div id="menu">
             <ul>
                 <MenuItem path="/" text="Home" />
                 <MenuItem path="/register" text="Sign Up" />
-                <MenuItem path="/login" text="Log in" />
+                {loginMenuItem}
             </ul>
         </div>
     );
 };
 
-export default Menu;
+const mapStateToProps = (state) => {
+    return {
+        authenticated: state.login.authenticated
+    };
+}
+
+export default connect(mapStateToProps)(Menu);
