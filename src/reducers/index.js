@@ -11,6 +11,10 @@ const userState = {
   verified: false
 };
 
+const appState = {
+  inProgress: false
+};
+
 const toggleHeader = (state = true, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
