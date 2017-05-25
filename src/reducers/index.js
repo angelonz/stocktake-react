@@ -1,6 +1,16 @@
 import { assign } from 'lodash';
 import { reducer as formReducer } from 'redux-form';
 
+const uiState = {
+  showHeader: false
+};
+
+const userState = {
+  authenticated: false,
+  registered: false,
+  verified: false
+};
+
 const toggleHeader = (state = true, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
@@ -10,7 +20,12 @@ const toggleHeader = (state = true, action) => {
   }
 };
 
-const userRegistration = (state = {}, action) => {
+const registrationInitState = {
+  registrationInProgress: false,
+  registrationStatus: 'failed',
+};
+
+const userRegistration = (state = registrationInitState, action) => {
   switch (action.type) {
     case 'REGISTER':
       return assign({}, state, {
@@ -32,7 +47,12 @@ const userRegistration = (state = {}, action) => {
   }
 };
 
-const verification = (state = {}, action) => {
+const verificationInitState = {
+  verificationInProgress: false,
+  verificationStatus: 'failed',
+};
+
+const verification = (state = verificationInitState, action) => {
   switch (action.type) {
     case 'VERIFY':
       return assign({}, state, {
@@ -53,7 +73,12 @@ const verification = (state = {}, action) => {
   }
 };
 
-const login = (state = {}, action) => {
+const loginInitState = {
+  loginInProgress: false,
+  authenticated: false
+};
+
+const login = (state = loginInitState, action) => {
   switch (action.type) {
     case 'LOGIN':
       return assign({}, state, {
