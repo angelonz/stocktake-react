@@ -6,7 +6,7 @@ import Section from './Section';
 class Landing extends Component {
 
     componentDidMount() {
-        this.props.toggleHeader(false);
+        this.props.showHeader(false);
     }
 
     render() {
@@ -22,7 +22,7 @@ class Landing extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleHeader: (show) => {
+    showHeader: (show) => {
       dispatch({
         type: 'TOGGLE_HEADER',
         value: show

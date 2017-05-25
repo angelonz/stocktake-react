@@ -15,7 +15,7 @@ const appState = {
   inProgress: false
 };
 
-const toggleHeader = (state = true, action) => {
+const toggleHeader = (state = uiState, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
       return action.value;
@@ -24,12 +24,7 @@ const toggleHeader = (state = true, action) => {
   }
 };
 
-const registrationInitState = {
-  registrationInProgress: false,
-  registrationStatus: 'failed',
-};
-
-const userRegistration = (state = registrationInitState, action) => {
+const userRegistration = (state = userState, action) => {
   switch (action.type) {
     case 'REGISTER':
       return assign({}, state, {
@@ -105,7 +100,9 @@ const login = (state = loginInitState, action) => {
 };
 
 const reducers = {
-  showHeader: toggleHeader,
+  uiState: toggleHeader,
+  userState:
+  appState:
   registration: userRegistration,
   verification: verification,
   login: login,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Header = ({ showHeader }) => {
     return (
-        <header id="header" className={showHeader === true ? '' : 'alt'}>
+        <header id="header" className={showHeader === false ? 'alt' : ''}>
             <h1><Link to="/">StockTake</Link></h1>
             <Navigation />
         </header>
