@@ -1,20 +1,6 @@
 import { assign } from 'lodash';
 import { reducer as formReducer } from 'redux-form';
 
-const uiState = {
-  showHeader: false
-};
-
-const userState = {
-  authenticated: false,
-  registered: false,
-  verified: false
-};
-
-const appState = {
-  inProgress: false
-};
-
 const toggleHeader = (state = true, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
@@ -26,7 +12,8 @@ const toggleHeader = (state = true, action) => {
 
 const registrationInitState = {
   registrationInProgress: false,
-  registrationStatus: 'failed',
+  registrationStatus: '',
+  errorMessage: ''
 };
 
 const userRegistration = (state = registrationInitState, action) => {
@@ -42,9 +29,11 @@ const userRegistration = (state = registrationInitState, action) => {
         email: action.email
       });
     case 'REGISTER_FAILED':  
+      console.log('failed', action);
       return assign({}, state, {
         registrationInProgress: false,
-        registrationStatus: 'failed'
+        registrationStatus: 'failed',
+        errorMessage: action.errorMessage
       });
     default:
       return state;
@@ -53,7 +42,7 @@ const userRegistration = (state = registrationInitState, action) => {
 
 const verificationInitState = {
   verificationInProgress: false,
-  verificationStatus: 'failed',
+  verificationStatus: '',
 };
 
 const verification = (state = verificationInitState, action) => {

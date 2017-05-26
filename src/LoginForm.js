@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 //import queryString from 'query-string';
 import verify from './actions/verificationActions' 
 import login from './actions/loginActions' 
-import VerificationMessage from './VerificationMessage';
+import FormMessage from './FormMessage';
 import { push } from 'react-router-redux';
 
 class LoginForm extends Component {
@@ -30,12 +30,12 @@ class LoginForm extends Component {
 
     render() {
         const { handleSubmit } = this.props;
-        let verificationMessage = null;
+        let formMessage = null;
 
         const { verificationInProgress, verificationStatus } = this.props.verification;
 
         if (!verificationInProgress && verificationStatus === 'success') {
-            verificationMessage = <VerificationMessage />;
+            formMessage = <FormMessage message='You have successfully verified your account.  You may now log in.'/>;
         }
 
         return (
@@ -44,7 +44,7 @@ class LoginForm extends Component {
                 
                 <form onSubmit={handleSubmit(this.submitHandler)}>
                     <div className="row uniform">
-                        {verificationMessage}
+                        {formMessage}
                         <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
                         

@@ -3,7 +3,8 @@ import { reduxForm } from 'redux-form';
 import FormField from './FormField';
 import { assign } from 'lodash';
 import { connect } from 'react-redux';
-import register from './actions/registrationActions' 
+import register from './actions/registrationActions';
+import FormMessage from './FormMessage';
 
 class RegistrationForm extends Component {
 
@@ -25,13 +26,22 @@ class RegistrationForm extends Component {
     }
 
     render() {
-        const { handleSubmit, reset } = this.props;
+        const { handleSubmit, reset, registration } = this.props;
+        const { registrationStatus, errorMessage } = registration;
+
+        let formMessage = null;
+        if (registrationStatus === 'failed') {
+            formMessage = <FormMessage message={errorMessage} />;
+        }
+
         return (
             <section>
                 <h3>Register</h3>
                 <form onSubmit={handleSubmit(this.submitHandler)}>
                     <div className="row uniform">
-                        <FormField type="text" name="username" id="username" value="" placeholder="Name" cssClass="6u$ 12u$(xsmall)" />
+                        {formMessage}
+                        <FormField type="text" name="firstName" id="firstName" value="" placeholder="First Name" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="text" name="lastName" id="lastName" value="" placeholder="Last Name" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="password" name="confirm-password" id="confirm-password" value="" placeholder="Confirm Password" cssClass="6u$ 12u$(xsmall)" />
@@ -51,7 +61,12 @@ class RegistrationForm extends Component {
     }
 }
 
-
+const mapStateToProps = (state) => {
+    const { registration } = state;
+    return {
+        registration
+    } 
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -67,4 +82,4 @@ RegistrationForm = reduxForm({
   
 })(RegistrationForm);
 
-export default connect(null, mapDispatchToProps)(RegistrationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

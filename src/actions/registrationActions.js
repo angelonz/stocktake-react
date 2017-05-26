@@ -16,7 +16,12 @@ const register = (formValues) => {
             .end((err, res) => {
 
                 if (err || res.status !== HttpStatus.OK) {
-                    dispatch({ type: 'REGISTER_FAILED' });
+                    
+                    dispatch({ 
+                        type: 'REGISTER_FAILED',
+                        errorMessage: res.body.error
+                     });
+
                 } else {
                     dispatch({ 
                         type: 'REGISTER_SUCCESS',

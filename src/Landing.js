@@ -31,4 +31,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(Landing);
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
