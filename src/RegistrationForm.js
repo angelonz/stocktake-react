@@ -21,7 +21,7 @@ class RegistrationForm extends Component {
             delete formValues['confirm-password'];
         }
 
-        this.props.registerUser(formValues);
+        this.props.dispatch(register(formValues));
 
     }
 
@@ -68,18 +68,10 @@ const mapStateToProps = (state) => {
     } 
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        registerUser: (formValues) => {
-            dispatch(register(formValues));
-        }
-    };
-}
-
 // Decorate the form component
 RegistrationForm = reduxForm({
   form: 'register' // a unique name for this form
   
 })(RegistrationForm);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default connect(mapStateToProps)(RegistrationForm);

@@ -6,10 +6,10 @@ import Login from './Login';
 import AccountActivation from './AccountActivation';
 import Dashboard from './Dashboard';
 import NoMatch from './NoMatch';
-import authUtil from './utils/authUtil';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-const Main = () => {
-    
+const Main = (props) => {
     return (
         <Switch>
             <Route exact path='/' component={Landing}/>
@@ -19,7 +19,9 @@ const Main = () => {
             <Route path='/verify' component={Login} />
             <Route path='/login' component={Login} />
             <Route path='/logout' render={() => {
-                authUtil.logout();
+                props.dispatch({
+                    type: 'LOGOUT'
+                });
                 return <Redirect to='/'/>
             }} />
             <Route component={NoMatch}/>
@@ -27,4 +29,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default withRouter(connect()(Main));

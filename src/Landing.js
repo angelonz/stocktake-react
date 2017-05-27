@@ -6,7 +6,10 @@ import Section from './Section';
 class Landing extends Component {
 
     componentDidMount() {
-        this.props.toggleHeader(false);
+        this.props.dispatch({
+            type: 'TOGGLE_HEADER',
+            value: false
+        });
     }
 
     render() {
@@ -20,19 +23,4 @@ class Landing extends Component {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleHeader: (show) => {
-      dispatch({
-        type: 'TOGGLE_HEADER',
-        value: show
-      })
-    }
-  }
-};
-
-const mapStateToProps = (state) => {
-    return state;
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default connect()(Landing);

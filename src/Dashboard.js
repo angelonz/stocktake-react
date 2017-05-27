@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dashboard = props => {
+const Dashboard = () => {
     return (
         <section id="one" className="wrapper style1 special">
             <div className="inner">

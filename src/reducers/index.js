@@ -1,10 +1,53 @@
 import { assign } from 'lodash';
 import { reducer as formReducer } from 'redux-form';
+import authUtil from '../utils/authUtil';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-const toggleHeader = (state = true, action) => {
+const uiState = {
+  showHeader: true
+};
+
+const userState = {
+  authenticated: authUtil.isAuthenticated(),
+  email: undefined
+} 
+
+const userStateReducer = (state = userState, action) => {
+  switch (action.type) {
+    case 'REGISTER_SUCCESS':
+      return assign({}, state, {
+        email: action.email
+      });
+    case 'LOGIN_SUCCESS':
+      return assign({}, state, {
+        authenticated: true
+      });
+    case 'LOGIN_FAILED':
+      return assign({}, state, {
+        authenticated: false
+      });
+    case 'LOGOUT':
+      authUtil.logout();
+      return assign({}, state, {
+        authenticated: false
+      });  
+    default:
+      return state;
+  }
+}
+
+const uiStateReducer = (state = uiState, action) => {
   switch (action.type) {
     case 'TOGGLE_HEADER':
-      return action.value;
+      return assign({}, state, {
+        showHeader: action.value
+      });
+    case 'LOGOUT':
+      authUtil.logout();
+      return assign({}, state, {
+        showHeader: false
+      });  
     default:
       return state;
   }
@@ -25,8 +68,7 @@ const userRegistration = (state = registrationInitState, action) => {
     case 'REGISTER_SUCCESS':
       return assign({}, state, {
         registrationInProgress: false,
-        registrationStatus: 'success',
-        email: action.email
+        registrationStatus: 'success'
       });
     case 'REGISTER_FAILED':  
       console.log('failed', action);
@@ -67,8 +109,7 @@ const verification = (state = verificationInitState, action) => {
 };
 
 const loginInitState = {
-  loginInProgress: false,
-  authenticated: false
+  loginInProgress: false
 };
 
 const login = (state = loginInitState, action) => {
@@ -79,26 +120,33 @@ const login = (state = loginInitState, action) => {
       });
     case 'LOGIN_SUCCESS':
       return assign({}, state, {
-        loginInProgress: false,
-        authenticated: true
+        loginInProgress: false
       });
-    case 'LOGOUT':  
     case 'LOGIN_FAILED':
       return assign({}, state, {
-        loginInProgress: false,
-        authenticated: false
+        loginInProgress: false
       });
     default:
       return state;
   }
 };
 
-const reducers = {
-  showHeader: toggleHeader,
+const appReducer = combineReducers({
+  ui: uiStateReducer,
+  user: userStateReducer,
   registration: userRegistration,
   verification: verification,
   login: login,
-  form: formReducer
-};
+  form: formReducer,
+  router: routerReducer
+});
 
-export default reducers ;
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+}
+
+export default rootReducer ;

@@ -19,9 +19,9 @@ const AccountActivation = (props) => {
     );
 };
 
-const mapStateToProps = ({registration}) => {
+const mapStateToProps = ({user}) => {
     return {
-        email: registration.email
+        email: user.email
     };
 }
 

@@ -25,7 +25,7 @@ const Menu = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        authenticated: state.login.authenticated
+        authenticated: state.user.authenticated
     };
 }
 

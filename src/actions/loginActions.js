@@ -24,7 +24,7 @@ const login = (formValues) => {
                     });
                     // save the token in localStorage
                     authUtil.storeToken(res.body.jwt);
-                    dispatch(push('/activate'));
+                    dispatch(push('/dashboard'));
                 }
 
             });
