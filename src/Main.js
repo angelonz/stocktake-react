@@ -8,13 +8,18 @@ import Dashboard from './Dashboard';
 import NoMatch from './NoMatch';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 
 const Main = (props) => {
     return (
         <Switch>
             <Route exact path='/' component={Landing}/>
-            <Route path='/dashboard' component={Dashboard} />
-            <Route path='/register' component={Register} />
+            <ProtectedRoute path='/dashboard' component={Dashboard} />
+            <Route path='/register' render={() => {
+                return (
+                    props.authenticated ? <Redirect to='/dashboard' /> : <Register />
+                )
+            }} />
             <Route path='/activate' component={AccountActivation}/>
             <Route path='/verify' component={Login} />
             <Route path='/login' component={Login} />
@@ -29,4 +34,11 @@ const Main = (props) => {
     );
 };
 
-export default withRouter(connect()(Main));
+const mapStateToProps = (state) => {
+    const { authenticated } = state.user;
+    return {
+        authenticated
+    }
+};
+
+export default withRouter(connect(mapStateToProps)(Main));

@@ -1,6 +1,5 @@
 import request from 'superagent';
 import HttpStatus from 'http-status-codes';
-import { push } from 'react-router-redux';
 import authUtil from '../utils/authUtil';
 
 const login = (formValues) => {
@@ -19,12 +18,12 @@ const login = (formValues) => {
                 if (err || res.status !== HttpStatus.OK) {
                     dispatch({ type: 'LOGIN_FAILED' });
                 } else {
+                    // save the token in localStorage
+                    authUtil.storeToken(res.body.jwt);
                     dispatch({ 
                         type: 'LOGIN_SUCCESS'
                     });
-                    // save the token in localStorage
-                    authUtil.storeToken(res.body.jwt);
-                    dispatch(push('/dashboard'));
+                    
                 }
 
             });

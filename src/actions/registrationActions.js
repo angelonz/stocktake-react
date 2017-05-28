@@ -27,7 +27,12 @@ const register = (formValues) => {
                         type: 'REGISTER_SUCCESS',
                         email: formValues.email
                     });
-                    dispatch(push('/activate'));
+                    dispatch(push({
+                        pathname: '/activate',
+                        state: {
+                            from: '/register'
+                        }
+                    }));
                 }
 
             });

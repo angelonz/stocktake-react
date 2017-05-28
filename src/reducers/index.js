@@ -109,7 +109,8 @@ const verification = (state = verificationInitState, action) => {
 };
 
 const loginInitState = {
-  loginInProgress: false
+  loginInProgress: false,
+  redirectToReferrer: false
 };
 
 const login = (state = loginInitState, action) => {
@@ -120,11 +121,13 @@ const login = (state = loginInitState, action) => {
       });
     case 'LOGIN_SUCCESS':
       return assign({}, state, {
-        loginInProgress: false
+        loginInProgress: false,
+        redirectToReferrer: true
       });
     case 'LOGIN_FAILED':
       return assign({}, state, {
-        loginInProgress: false
+        loginInProgress: false,
+        redirectToReferrer: false
       });
     default:
       return state;
