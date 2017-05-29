@@ -7,6 +7,7 @@ import verify from './actions/verificationActions'
 import login from './actions/loginActions' 
 import FormMessage from './FormMessage';
 import { push } from 'react-router-redux';
+import isUndefined from 'lodash/isUndefined';
 
 class LoginForm extends Component {
 
@@ -33,9 +34,15 @@ class LoginForm extends Component {
         let formMessage = null;
 
         const { verificationInProgress, verificationStatus } = this.props.verification;
+        const { loginState, user } = this.props;
 
         if (!verificationInProgress && verificationStatus === 'success') {
             formMessage = <FormMessage message='You have successfully verified your account.  You may now log in.'/>;
+        }
+
+        console.log('login props', this.props);
+        if (!user.authenticated && !loginState.loginInProgress && !isUndefined(loginState.errorMessage)) {
+            formMessage = <FormMessage message={loginState.errorMessage}/>;
         }
 
         return (
@@ -80,10 +87,13 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     const { pathname, search } = state.router.location;
+    const { verification, user } = state;
     return {
         pathname,
         search,
-        verification: state.verification
+        verification,
+        loginState: state.login,
+        user
     };
 }
 

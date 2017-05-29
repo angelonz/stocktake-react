@@ -2,3 +2,5 @@ form validation
 need to check if jwt is expired on client side
 unprotected route?
 header link to home page is not working
+password lockout
+password reset

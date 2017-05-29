@@ -6,7 +6,9 @@ const Navigation = () => {
         <nav id="nav">
             <ul>
                 <li className="special">
-                    <a href="#menu" className="menuToggle"><span>Menu</span></a>
+                    <a href="#menu" className="menuToggle">
+                        <span className="menu">Menu</span>
+                    </a>
                     <Menu />
                 </li>
             </ul>

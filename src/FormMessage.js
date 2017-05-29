@@ -1,5 +1,5 @@
 import React from 'react';
-import './formMessage.css';
+import './stocktake.css';
 
 const FormMessage = ({ message }) => {
     return (

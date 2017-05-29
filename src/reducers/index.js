@@ -21,7 +21,9 @@ const userStateReducer = (state = userState, action) => {
       });
     case 'LOGIN_SUCCESS':
       return assign({}, state, {
-        authenticated: true
+        authenticated: true,
+        firstName: action.firstName,
+        lastName: action.lastName
       });
     case 'LOGIN_FAILED':
     case 'NOT_AUTHENTICATED':
@@ -109,7 +111,8 @@ const verification = (state = verificationInitState, action) => {
 
 const loginInitState = {
   loginInProgress: false,
-  redirectToReferrer: false
+  redirectToReferrer: false,
+  errorMessage: undefined
 };
 
 const login = (state = loginInitState, action) => {
@@ -121,12 +124,14 @@ const login = (state = loginInitState, action) => {
     case 'LOGIN_SUCCESS':
       return assign({}, state, {
         loginInProgress: false,
-        redirectToReferrer: true
+        redirectToReferrer: true,
+        errorMessage: undefined
       });
     case 'LOGIN_FAILED':
       return assign({}, state, {
         loginInProgress: false,
-        redirectToReferrer: false
+        redirectToReferrer: false,
+        errorMessage: action.errorMessage
       });
     default:
       return state;

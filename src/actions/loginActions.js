@@ -16,12 +16,17 @@ const login = (formValues) => {
             .end((err, res) => {
 
                 if (err || res.status !== HttpStatus.OK) {
-                    dispatch({ type: 'LOGIN_FAILED' });
+                    dispatch({ 
+                        type: 'LOGIN_FAILED',
+                        errorMessage: res.body.error
+                    });
                 } else {
                     // save the token in localStorage
                     authUtil.storeToken(res.body.jwt);
                     dispatch({ 
-                        type: 'LOGIN_SUCCESS'
+                        type: 'LOGIN_SUCCESS',
+                        firstName: res.body.firstName,
+                        lastName: res.body.lastName
                     });
                     
                 }
