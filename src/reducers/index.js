@@ -24,14 +24,13 @@ const userStateReducer = (state = userState, action) => {
         authenticated: true
       });
     case 'LOGIN_FAILED':
-      return assign({}, state, {
-        authenticated: false
-      });
+    case 'NOT_AUTHENTICATED':
     case 'LOGOUT':
       authUtil.logout();
       return assign({}, state, {
         authenticated: false
       });  
+
     default:
       return state;
   }

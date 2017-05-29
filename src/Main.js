@@ -9,8 +9,16 @@ import NoMatch from './NoMatch';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+import authUtil from './utils/authUtil';
 
 const Main = (props) => {
+
+    if (!authUtil.isAuthenticated()) {
+        props.dispatch({
+            type: 'NOT_AUTHENTICATED'
+        });
+    }
+
     return (
         <Switch>
             <Route exact path='/' component={Landing}/>
