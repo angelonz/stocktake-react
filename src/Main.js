@@ -13,19 +13,13 @@ import authUtil from './utils/authUtil';
 
 const Main = (props) => {
 
-    if (!authUtil.isAuthenticated()) {
-        props.dispatch({
-            type: 'NOT_AUTHENTICATED'
-        });
-    }
-
     return (
         <Switch>
             <Route exact path='/' component={Landing}/>
             <ProtectedRoute path='/dashboard' component={Dashboard} />
             <Route path='/register' render={() => {
                 return (
-                    props.authenticated ? <Redirect to='/dashboard' /> : <Register />
+                    authUtil.isAuthenticated() ? <Redirect to='/dashboard' /> : <Register />
                 )
             }} />
             <Route path='/activate' component={AccountActivation}/>
@@ -42,11 +36,4 @@ const Main = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    const { authenticated } = state.user;
-    return {
-        authenticated
-    }
-};
-
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect()(Main));

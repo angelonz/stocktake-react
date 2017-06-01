@@ -9,7 +9,6 @@ const uiState = {
 };
 
 const userState = {
-  authenticated: authUtil.isAuthenticated(),
   email: undefined
 } 
 
@@ -21,18 +20,9 @@ const userStateReducer = (state = userState, action) => {
       });
     case 'LOGIN_SUCCESS':
       return assign({}, state, {
-        authenticated: true,
         firstName: action.firstName,
         lastName: action.lastName
       });
-    case 'LOGIN_FAILED':
-    case 'NOT_AUTHENTICATED':
-    case 'LOGOUT':
-      authUtil.logout();
-      return assign({}, state, {
-        authenticated: false
-      });  
-
     default:
       return state;
   }
