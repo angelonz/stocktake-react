@@ -40,7 +40,7 @@ class RegistrationForm extends Component {
                 <form onSubmit={handleSubmit(this.submitHandler)}>
                     <div className="row uniform">
                         {formMessage}
-                        <FormField type="text" name="firstName" id="firstName" value="" placeholder="First Name" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="text" name="firstName" id="firstName" value="" placeholder="First Name" cssClass="6u$ 12u$(xsmall)" autoFocus/>
                         <FormField type="text" name="lastName" id="lastName" value="" placeholder="Last Name" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
                         <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />

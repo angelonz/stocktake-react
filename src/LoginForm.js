@@ -23,6 +23,8 @@ class LoginForm extends Component {
         if (pathname && pathname === '/verify') { // came from email verification link
             this.props.verify(search);
         } 
+
+
     }
     
     submitHandler(values) {
@@ -40,7 +42,6 @@ class LoginForm extends Component {
             formMessage = <FormMessage message='You have successfully verified your account.  You may now log in.'/>;
         }
 
-        console.log('login props', this.props);
         if (!user.authenticated && !loginState.loginInProgress && !isUndefined(loginState.errorMessage)) {
             formMessage = <FormMessage message={loginState.errorMessage}/>;
         }
@@ -52,7 +53,7 @@ class LoginForm extends Component {
                 <form onSubmit={handleSubmit(this.submitHandler)}>
                     <div className="row uniform">
                         {formMessage}
-                        <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" autoFocus/>
                         <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
                         
                         <div className="12u$">
