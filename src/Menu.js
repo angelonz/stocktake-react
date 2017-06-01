@@ -1,13 +1,13 @@
 import React from 'react';
 import MenuItem from './MenuItem';
-import authUtil from './utils/authUtil';
+import { connect } from 'react-redux';
 
-const Menu = () => {
+const Menu = (props) => {
 
     let loginMenuItem = <MenuItem path="/login" text="Log in" />;
     let signUpMenuItem = <MenuItem path="/register" text="Register" />;
 
-    if (authUtil.isAuthenticated()) {
+    if (props.authenticated) {
         loginMenuItem = <MenuItem path="/logout" text="Log out" />;
         signUpMenuItem = null;
     } 
@@ -23,6 +23,11 @@ const Menu = () => {
     );
 };
 
+const mapStateToProps = (state) => {
+    const { authenticated } = state.user;
+    return {
+        authenticated
+    };
+}
 
-
-export default Menu;
+export default connect(mapStateToProps)(Menu);

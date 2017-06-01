@@ -3,11 +3,10 @@ import LoginForm from './LoginForm';
 import FormWrapper from './FormWrapper';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import authUtil from './utils/authUtil';
 
 const Login = (props) => {
 
-    if (authUtil.isAuthenticated()) {
+    if (props.authenticated) {
         return <Redirect to='/dashboard' />;
     }
 
@@ -31,8 +30,10 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     const { redirectToReferrer } = state.login;
+    const { authenticated } = state.user;
     return {
-        redirectToReferrer
+        redirectToReferrer,
+        authenticated
     }
 };
 

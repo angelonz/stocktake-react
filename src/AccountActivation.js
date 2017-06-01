@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import isUndefined from 'lodash/isUndefined';
-import authUtil from './utils/authUtil';
 
 const AccountActivation = (props) => {
-    const { email, location } = props;
+    const { email, authenticated, location } = props;
 
-    if (authUtil.isAuthenticated()) {
+    if (authenticated) {
         return <Redirect to='/dashboard' />;
     }
 
@@ -34,9 +33,10 @@ const AccountActivation = (props) => {
 };
 
 const mapStateToProps = ({user}) => {
-    const { email } = user;
+    const { email, authenticated } = user;
     return {
-        email
+        email,
+        authenticated
     };
 }
 
