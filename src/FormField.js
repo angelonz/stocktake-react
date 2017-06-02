@@ -1,11 +1,17 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-const FormField = ({ cssClass, type, name, id, placeholder, value, autoFocus }) => {
+const inputField = ({input, label, type, cssClass, placeholder, meta: {touched, error, submitFailed}}) => (
+    <div className={cssClass}>
+      <input {...input} placeholder={placeholder} type={type} />
+      {touched &&
+                (error && <p className="validation-error">{error}</p>)}
+    </div>            
+)
+
+const FormField = (props) => {
     return (
-        <div className={cssClass}>
-            <Field type={type} name={name} id={id} value={value} placeholder={placeholder} component="input" autoFocus={autoFocus}/>
-        </div>
+      <Field {...props} name={props.name} component={inputField}/>
     );
 };
 

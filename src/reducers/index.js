@@ -4,6 +4,7 @@ import authUtil from '../utils/authUtil';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
+
 const uiState = {
   showHeader: true
 };
