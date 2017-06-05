@@ -1,9 +1,33 @@
 import validate from 'validate.js';
 import forIn from 'lodash/forIn';
 
+const runChecks = (values, constraints) => {
+    const errors = {};
+    const result = validate(values, constraints);
+
+    forIn(result, (value, key) => {
+        errors[key] = value[0];
+    });
+
+    return errors;
+};
+
+const validateLoginForm = (values) => {
+    const constraints = {
+        email: {
+            presence: true,
+            email: true
+        },
+        password: {
+            presence: true
+        }
+    };
+
+    return runChecks(values, constraints);
+
+};
 
 const validateRegistrationForm = (values) => {
-    const errors = {};
     const constraints = {
         firstName: {
             presence: true
@@ -16,7 +40,10 @@ const validateRegistrationForm = (values) => {
             email: true
         },
         password: {
-            presence: true
+            presence: true,
+            format: {
+                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+            }
         },
         "confirm-password": {
             presence: true,
@@ -27,15 +54,11 @@ const validateRegistrationForm = (values) => {
         }
     };
 
-    const result = validate(values, constraints);
+    return runChecks(values, constraints);
 
-    forIn(result, (value, key) => {
-        errors[key] = value[0];
-    });
-
-    return errors;
 };
 
 export default {
-    validateRegistrationForm
+    validateRegistrationForm,
+    validateLoginForm
 }

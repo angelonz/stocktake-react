@@ -8,6 +8,7 @@ import login from './actions/loginActions'
 import FormMessage from './FormMessage';
 import { push } from 'react-router-redux';
 import isUndefined from 'lodash/isUndefined';
+import validationUtil from './utils/validationUtil';
 
 class LoginForm extends Component {
 
@@ -28,11 +29,11 @@ class LoginForm extends Component {
     }
     
     submitHandler(values) {
-        this.props.login(values);
+        //this.props.login(values);
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, submitFailed } = this.props;
         let formMessage = null;
 
         const { verificationInProgress, verificationStatus } = this.props.verification;
@@ -53,8 +54,8 @@ class LoginForm extends Component {
                 <form onSubmit={handleSubmit(this.submitHandler)}>
                     <div className="row uniform">
                         {formMessage}
-                        <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" autoFocus/>
-                        <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" />
+                        <FormField type="email" name="email" id="email" value="" placeholder="Email" cssClass="6u$ 12u$(xsmall)" autoFocus submitFailed={submitFailed}/>
+                        <FormField type="password" name="password" id="password" value="" placeholder="Password" cssClass="6u$ 12u$(xsmall)" submitFailed={submitFailed}/>
                         
                         <div className="12u$">
                             <ul className="actions">
@@ -100,8 +101,8 @@ const mapStateToProps = (state) => {
 
 // Decorate the form component
 LoginForm = reduxForm({
-  form: 'login' // a unique name for this form
-  
+  form: 'login', // a unique name for this form
+  validate: validationUtil.validateLoginForm
 })(LoginForm);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

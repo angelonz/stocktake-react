@@ -28,7 +28,7 @@ class RegistrationForm extends Component {
 
     render() {
         
-        const { handleSubmit, reset, registration, submitFailed } = this.props;
+        const { handleSubmit, registration, submitFailed } = this.props;
         const { registrationStatus, errorMessage } = registration;
 
         let formMessage = null;
@@ -52,7 +52,6 @@ class RegistrationForm extends Component {
                         <div className="12u$">
                             <ul className="actions">
                                 <li><input type="submit" value="Register" className="special" /></li>
-                                <li><input type="reset" value="Reset" onClick={reset}/></li>
                             </ul>
                         </div>
                     </div>    

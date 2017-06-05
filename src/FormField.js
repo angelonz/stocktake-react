@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 const inputField = ({input, label, type, cssClass, placeholder, meta: {touched, error, submitFailed}}) => (
     <div className={cssClass}>
       <input {...input} placeholder={placeholder} type={type} />
-      {touched &&
+      {submitFailed && touched &&
                 (error && <p className="validation-error">{error}</p>)}
     </div>            
 )
