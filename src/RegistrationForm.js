@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import FormField from './FormField';
 import { assign } from 'lodash';
 import { connect } from 'react-redux';
-//import register from './actions/registrationActions';
+import register from './actions/registrationActions';
 import FormMessage from './FormMessage';
 import validationUtil from './utils/validationUtil';
 
@@ -16,13 +16,15 @@ class RegistrationForm extends Component {
     
     submitHandler(values) {
 
+        console.log('submit handler called!');
+
         // we don't need the confirm-password property
         let formValues = assign({}, values);
         if (formValues['confirm-password']) {
             delete formValues['confirm-password'];
         }
 
-        //this.props.dispatch(register(formValues));
+        this.props.dispatch(register(formValues));
 
     }
 

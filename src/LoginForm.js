@@ -29,7 +29,7 @@ class LoginForm extends Component {
     }
     
     submitHandler(values) {
-        //this.props.login(values);
+        this.props.login(values);
     }
 
     render() {

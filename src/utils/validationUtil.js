@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import validate from 'validate.js';
 import forIn from 'lodash/forIn';
 
@@ -30,10 +32,16 @@ const validateLoginForm = (values) => {
 const validateRegistrationForm = (values) => {
     const constraints = {
         firstName: {
-            presence: true
+            presence: true,
+            length: {
+                maximum: 35
+            }
         },
         lastName: {
-            presence: true
+            presence: true,
+            length: {
+                maximum: 35
+            }
         },
         email: {
             presence: true,
@@ -42,7 +50,11 @@ const validateRegistrationForm = (values) => {
         password: {
             presence: true,
             format: {
-                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+                pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,15}$",
+                message: "should be between 8 to 15 characters, contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
+            },
+            length: {
+                maximum: 15
             }
         },
         "confirm-password": {
@@ -50,7 +62,11 @@ const validateRegistrationForm = (values) => {
             equality: "password"
         },
         secret: {
-            presence: true
+            presence: true,
+            length: {
+                minimum: 8,
+                tooShort: "needs to have %{count} characters or more"
+            }
         }
     };
 
