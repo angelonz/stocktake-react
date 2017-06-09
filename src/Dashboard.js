@@ -1,5 +1,5 @@
 import React from 'react';
-import SitesInput from './SitesInput';
+import SiteInput from './SiteInput';
 
 const Dashboard = () => {
     return (
@@ -16,7 +16,7 @@ const Dashboard = () => {
 
             <section className="wrapper style5">   
                 <div className="inner">
-                    <SitesInput />
+                    <SiteInput />
                 </div>
                 
             </section>

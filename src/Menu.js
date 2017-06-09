@@ -6,10 +6,12 @@ const Menu = (props) => {
 
     let loginMenuItem = <MenuItem path="/login" text="Log in" />;
     let signUpMenuItem = <MenuItem path="/register" text="Register" />;
+    let dashboardMenuItem = null;
 
     if (props.authenticated) {
         loginMenuItem = <MenuItem path="/logout" text="Log out" />;
         signUpMenuItem = null;
+        dashboardMenuItem = <MenuItem path="/dashboard" text="Dashboard" />;
     } 
 
     return (
@@ -17,6 +19,7 @@ const Menu = (props) => {
             <ul>
                 <MenuItem path="/" text="Home" />
                 { signUpMenuItem }
+                { dashboardMenuItem }
                 { loginMenuItem }
             </ul>
         </div>
