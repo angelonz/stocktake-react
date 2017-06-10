@@ -16,5 +16,8 @@ export default {
     },
     logout: () => {
         localStorage.removeItem('jwt');
+    },
+    getJWT: () => {
+        return localStorage.getItem('jwt');
     }
 }
