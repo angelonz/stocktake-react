@@ -26,7 +26,8 @@ const login = (formValues) => {
                     dispatch({ 
                         type: 'LOGIN_SUCCESS',
                         firstName: res.body.firstName,
-                        lastName: res.body.lastName
+                        lastName: res.body.lastName,
+                        sites: res.body.sites
                     });
                     
                 }

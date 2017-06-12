@@ -1,5 +1,4 @@
-form validation
-need to check if jwt is expired on client side
+need to redirect to login page if API returns 401
 unprotected route?
 header link to home page is not working
 password lockout
