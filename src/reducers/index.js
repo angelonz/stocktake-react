@@ -139,12 +139,22 @@ const login = (state = loginInitState, action) => {
   }
 };
 
+const sitesReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SITES_FETCHED':
+      return action.sites;
+    default:
+      return state;
+  }
+};
+
 const appReducer = combineReducers({
   ui: uiStateReducer,
   user: userStateReducer,
   registration: userRegistration,
   verification: verification,
   login: login,
+  sites: sitesReducer,
   form: formReducer,
   router: routerReducer
 });
