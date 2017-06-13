@@ -1,10 +1,22 @@
 import React from 'react';
 
-const Earnings = () => {
+const Earnings = ({sites}) => {
+    console.log(sites);
     return (
-        <div>
-            <h1>This is the Earnings page.</h1>
-        </div>
+        <section>
+            <h3>This is the Earnings page.</h3>
+            <div className="row uniform">
+                { sites.map((site) => {
+                        return (
+                            <div className="4u" key={site.site}>
+                                <span className="image fit"><img src="images/pic01.jpg" alt="" /></span>
+                            </div>
+                        )   
+                    })
+                }
+                
+            </div>
+        </section>
     );
 };
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import SiteInput from './SiteInput';
+import Earnings from './Earnings';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
+const Dashboard = ({ sites }) => {
     return (
         <div>   
 
@@ -17,6 +19,7 @@ const Dashboard = () => {
             <section className="wrapper style5">   
                 <div className="inner">
                     <SiteInput />
+                    <Earnings sites={sites}/>
                 </div>
                 
             </section>
@@ -27,4 +30,10 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+    return {
+        sites: state.sites
+    }
+};
+
+export default connect(mapStateToProps)(Dashboard);

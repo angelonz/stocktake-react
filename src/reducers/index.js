@@ -139,7 +139,9 @@ const login = (state = loginInitState, action) => {
   }
 };
 
-const sitesReducer = (state = [], action) => {
+const sitesInitialState = [];
+
+const sitesReducer = (state = sitesInitialState, action) => {
   switch (action.type) {
     case 'SITES_FETCHED':
       return action.sites;
