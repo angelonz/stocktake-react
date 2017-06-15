@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import { createStore, applyMiddleware } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
 
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -19,11 +20,17 @@ const history = createHistory()
 const middleware = routerMiddleware(history)
 
 const store = createStore(
-  rootReducer, composeWithDevTools(
-    applyMiddleware(thunkMiddleware, middleware)
-    // other store enhancers if any
+  rootReducer, 
+  undefined,
+  composeWithDevTools(
+    applyMiddleware(thunkMiddleware, middleware),
+    autoRehydrate()
   )
 );
+
+persistStore(store, {
+  whitelist: ['sites']
+});
 
 render((
   <Provider store={store}>

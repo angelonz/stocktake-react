@@ -1,10 +1,9 @@
 import React from 'react';
 
 const Earnings = ({sites}) => {
-    console.log(sites);
     return (
         <section>
-            <h3>This is the Earnings page.</h3>
+            <h3>Your Earnings</h3>
             <div className="row uniform">
                 { sites.map((site) => {
                         return (

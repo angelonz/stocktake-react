@@ -2,8 +2,17 @@ import React from 'react';
 import SiteInput from './SiteInput';
 import Earnings from './Earnings';
 import { connect } from 'react-redux';
+import authUtil from './utils/authUtil';
+import { Redirect } from 'react-router-dom';
 
 const Dashboard = ({ sites }) => {
+
+    if (!authUtil.isAuthenticated()) {
+        return (
+            <Redirect to='/login' />
+        );
+    }
+
     return (
         <div>   
 
@@ -18,10 +27,10 @@ const Dashboard = ({ sites }) => {
 
             <section className="wrapper style5">   
                 <div className="inner">
-                    <SiteInput />
                     <Earnings sites={sites}/>
+                    <hr/>
+                    <SiteInput />
                 </div>
-                
             </section>
 
         </div>

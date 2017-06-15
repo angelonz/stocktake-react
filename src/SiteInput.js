@@ -19,6 +19,8 @@ class SiteInput extends Component {
 
         const { handleSubmit, submitFailed } = this.props;
 
+        
+
         return (
             <section>
                 <h3>Add To My Sites</h3>

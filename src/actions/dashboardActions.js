@@ -5,6 +5,14 @@ import HttpStatus from 'http-status-codes';
 const addSite = (formValues) => {
     return (dispatch) => {
 
+        if (!authUtil.isAuthenticated()) {
+            dispatch({
+                type: 'NOT_AUTHENTICATED',
+                errorMessage: 'Session expired.  Please log in again.'
+            });
+            return;
+        }
+
         const site = formValues.site.toLowerCase();
 
         request.post(`/api/${site}`)
@@ -21,7 +29,7 @@ const addSite = (formValues) => {
                 } else {
                     dispatch({
                         type: 'ADD_SITE_SUCCESS',
-                        site
+                        sites: res.body.sites
                     });
                 }
 

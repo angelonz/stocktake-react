@@ -30,6 +30,7 @@ const userStateReducer = (state = userState, action) => {
     case 'NOT_AUTHENTICATED':
     case 'LOGOUT':
       authUtil.logout();
+      localStorage.removeItem('reduxPersist:sites');
       return assign({}, state, {
         authenticated: false
       });  
@@ -116,6 +117,14 @@ const loginInitState = {
   errorMessage: undefined
 };
 
+const setLoginState = (loginInProgress, redirectToReferrer, errorMessage) => {
+  return {
+    loginInProgress,
+    redirectToReferrer,
+    errorMessage
+  }
+}
+
 const login = (state = loginInitState, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -123,17 +132,12 @@ const login = (state = loginInitState, action) => {
         loginInProgress: true
       });
     case 'LOGIN_SUCCESS':
-      return assign({}, state, {
-        loginInProgress: false,
-        redirectToReferrer: true,
-        errorMessage: undefined
-      });
+      return assign({}, state, setLoginState(false, true, undefined));
+    case 'NOT_AUTHENTICATED':
+      return assign({}, state, setLoginState(false, false, action.errorMessage));
     case 'LOGIN_FAILED':
-      return assign({}, state, {
-        loginInProgress: false,
-        redirectToReferrer: false,
-        errorMessage: action.errorMessage
-      });
+      return assign({}, state, setLoginState(false, false, action.errorMessage));
+
     default:
       return state;
   }
@@ -143,6 +147,7 @@ const sitesInitialState = [];
 
 const sitesReducer = (state = sitesInitialState, action) => {
   switch (action.type) {
+    case 'ADD_SITE_SUCCESS':
     case 'SITES_FETCHED':
       return action.sites;
     default:
