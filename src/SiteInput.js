@@ -13,13 +13,12 @@ class SiteInput extends Component {
 
     addSiteHandler(values) {
         this.props.addSite(values);
+        this.props.reset();
     }
 
     render() {
 
         const { handleSubmit, submitFailed } = this.props;
-
-        
 
         return (
             <section>

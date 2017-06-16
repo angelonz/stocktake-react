@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteInput from './SiteInput';
-import Earnings from './Earnings';
+import EarningsContainer from './EarningsContainer';
 import { connect } from 'react-redux';
 import authUtil from './utils/authUtil';
 import { Redirect } from 'react-router-dom';
@@ -27,7 +27,7 @@ const Dashboard = ({ sites }) => {
 
             <section className="wrapper style5">   
                 <div className="inner">
-                    <Earnings sites={sites}/>
+                    <EarningsContainer userSites={sites}/>
                     <hr/>
                     <SiteInput />
                 </div>

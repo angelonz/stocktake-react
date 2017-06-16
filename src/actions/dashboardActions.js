@@ -36,8 +36,21 @@ const addSite = (formValues) => {
             });
 
     };    
+};
+
+const fetchBalance = (site) => {
+    return (dispatch) => {
+        request.get(`/api/${site}`)
+            .set('Authorization', `Bearer ${authUtil.getJWT()}`)
+            .end((err, res) => {
+
+                console.log('fetchBalance', res);
+
+            });
+    }
 }
 
 export {
-    addSite
+    addSite,
+    fetchBalance
 }
