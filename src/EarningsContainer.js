@@ -3,13 +3,12 @@ import Site from './Site';
 import { isEmpty } from 'lodash';
 
 const EarningsContainer = ({ userSites }) => {
-    
     let display;
 
-    if (isEmpty(userSites)) {
+    if (isEmpty(userSites.sites)) {
         display = <p>You have no sites yet.  Get started by adding a site.</p>
     } else {
-        display = userSites.map((website) => <Site siteName={website.site} key={website.site}/>);
+        display = userSites.sites.map((website) => <Site siteName={website.site} key={website.site}/>);
     }
 
     return (

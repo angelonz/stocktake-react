@@ -10,7 +10,32 @@ class Site extends Component {
     }
 
     render() {
-        const {siteName} = this.props;
+        const { siteName, userSites } = this.props;
+        const { balances } = userSites;
+
+        /*
+        const matchedSite = sites.find((detail) => {
+            return detail.site === siteName;
+        });
+        */
+
+        let balanceComponent = null;
+        /*
+        if (matchedSite && matchedSite.isBalanceBeingFetched === true) {
+            balanceComponent = <i className="fa fa-spinner fa-pulse fa-2x" aria-hidden="true" />;
+        }
+        */
+
+        const matchedBalance = balances.find((detail) => {
+            return detail.site === siteName;
+        });
+
+        if (matchedBalance) {
+            balanceComponent = matchedBalance.balance;
+        } else {
+            balanceComponent = <i className="fa fa-spinner fa-pulse fa-2x" aria-hidden="true" />;
+        }
+
         return (
             <div className="4u">
                 <span className="image fit">
@@ -18,7 +43,7 @@ class Site extends Component {
                         <header>
                             <h5>{siteName}</h5>
                         </header>
-                        <p><i className="fa fa-spinner fa-pulse fa-2x" aria-hidden="true"></i></p>
+                        <p>{ balanceComponent }</p>
                         <a href="#" className="button special small">Edit</a>
                     
                     </div>
@@ -30,6 +55,12 @@ class Site extends Component {
     
 };
 
+const mapStateToProps = (state) => {
+    return {
+        userSites: state.sites
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchBalance: (site) => {
@@ -38,4 +69,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Site);
+export default connect(mapStateToProps, mapDispatchToProps)(Site);

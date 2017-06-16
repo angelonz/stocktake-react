@@ -33,6 +33,7 @@ class SiteInput extends Component {
                                     <option value="gettyimages">Getty Images</option>
                                     <option value="123rf">123RF</option>
                                     <option value="dreamstime">Dreamstime</option>
+                                    <option value="bigstockphoto">Bigstockphoto</option>
                                 </Field>
                             </div>
                         </div>

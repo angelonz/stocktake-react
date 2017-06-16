@@ -29,9 +29,17 @@ const login = (formValues) => {
                         lastName: res.body.lastName
                     });
 
+                    // adding an isBalanceBeingFetched property
+                    const enhancedSites = res.body.sites.map((site) => {
+                        return {
+                            ...site,
+                            isBalanceBeingFetched: true
+                        }
+                    });
+
                     dispatch({
                         type: 'SITES_FETCHED',
-                        sites: res.body.sites
+                        sites: enhancedSites
                     });
                     
                 }

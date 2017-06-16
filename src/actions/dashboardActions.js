@@ -27,9 +27,18 @@ const addSite = (formValues) => {
                         errorMessage: res.body.error
                     });
                 } else {
+
+                    // adding an isBalanceBeingFetched property
+                    const enhancedSites = res.body.sites.map((site) => {
+                        return {
+                            ...site,
+                            isBalanceBeingFetched: true
+                        }
+                    });
+
                     dispatch({
                         type: 'ADD_SITE_SUCCESS',
-                        sites: res.body.sites
+                        sites: enhancedSites
                     });
                 }
 
@@ -44,7 +53,13 @@ const fetchBalance = (site) => {
             .set('Authorization', `Bearer ${authUtil.getJWT()}`)
             .end((err, res) => {
 
-                console.log('fetchBalance', res);
+                if (res.status === HttpStatus.OK || res.status === HttpStatus.NOT_MODIFIED) {
+                    dispatch({
+                        type: 'SITE_BALANCE_FETCHED',
+                        balance: res.body[site],
+                        site
+                    });
+                }
 
             });
     }

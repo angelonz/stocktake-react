@@ -143,13 +143,49 @@ const login = (state = loginInitState, action) => {
   }
 };
 
-const sitesInitialState = [];
+const sitesInitialState = {
+  sites: [],
+  balances: []
+};
 
 const sitesReducer = (state = sitesInitialState, action) => {
   switch (action.type) {
     case 'ADD_SITE_SUCCESS':
     case 'SITES_FETCHED':
-      return action.sites;
+      return assign({}, state, {
+        sites: action.sites
+      });  
+    case 'SITE_BALANCE_FETCHED':
+
+      // set isBalanceBeingFetched to false
+      const enhancedSites = state.sites.map((site) => {
+          return {
+              ...site,
+              isBalanceBeingFetched: false
+          }
+      });
+
+      const balancesCopy = state.balances.map((obj) => {
+        return obj;
+      });
+
+      const existingBalanceForSite = balancesCopy.find((obj) => {
+        return obj.site === action.site;
+      });
+
+      if (existingBalanceForSite) {
+        existingBalanceForSite.balance = action.balance;
+      } else {
+        balancesCopy.push({
+          site: action.site,
+          balance: action.balance
+        });
+      }
+
+      return assign({}, state, {
+        sites: enhancedSites,
+        balances: balancesCopy
+      }); 
     default:
       return state;
   }
