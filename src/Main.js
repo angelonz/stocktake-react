@@ -5,6 +5,7 @@ import Register from './Register';
 import Login from './Login';
 import AccountActivation from './AccountActivation';
 import Dashboard from './Dashboard';
+import Dashboard2 from './Dashboard2';
 import NoMatch from './NoMatch';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -26,6 +27,7 @@ class Main extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={Landing}/>
+                <ProtectedRoute path='/dashboard2' component={Dashboard2} />
                 <ProtectedRoute path='/dashboard' component={Dashboard} />
                 <Route path='/register' render={() => {
                     return (
